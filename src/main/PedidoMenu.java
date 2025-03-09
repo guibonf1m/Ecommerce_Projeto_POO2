@@ -1,14 +1,12 @@
-// src/main/PedidoMenu.java
 package main;
 
-import model.Cliente;
-import model.ItemPedido;
-import model.Pedido;
 import model.Produto;
-import service.ClienteService;
 import service.PedidoService;
+import service.ClienteService;
 import service.ProdutoService;
-
+import model.Cliente;
+import model.Pedido;
+import model.ItemPedido;
 import java.util.Scanner;
 
 public class PedidoMenu {
@@ -51,17 +49,19 @@ public class PedidoMenu {
         int idPedido = scanner.nextInt();
         scanner.nextLine(); // Consumir a nova linha
 
+        // Busca o pedido pelo ID
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido == null) {
             System.out.println("Pedido não encontrado!");
             return;
         }
 
-        System.out.println("Digite o identificador do produto:");
-        int idProduto = scanner.nextInt();
+        System.out.println("Digite o ID do produto:");
+        int idProduto = scanner.nextInt(); // Lê o ID do produto como int
         scanner.nextLine(); // Consumir a nova linha
 
-        Produto produto = produtoService.buscarProdutoPorIdentificador(idProduto);
+        // Busca o produto pelo ID
+        Produto produto = produtoService.buscarProdutoPorId(idProduto);
         if (produto == null) {
             System.out.println("Produto não encontrado!");
             return;
@@ -69,11 +69,14 @@ public class PedidoMenu {
 
         System.out.println("Digite a quantidade:");
         int quantidade = scanner.nextInt();
+        scanner.nextLine(); // Consumir a nova linha
 
-        System.out.println("Digite o valor de venda:");
-        double valorVenda = scanner.nextDouble();
+        System.out.println("Digite o preço:");
+        double preco = scanner.nextDouble();
+        scanner.nextLine(); // Consumir a nova linha
 
-        pedidoService.adicionarItem(pedido, produto, quantidade, valorVenda);
+        // Adiciona o item ao pedido
+        pedidoService.adicionarItem(pedido, produto, quantidade, preco);
         System.out.println("Item adicionado com sucesso!");
     }
 
@@ -83,28 +86,37 @@ public class PedidoMenu {
         int idPedido = scanner.nextInt();
         scanner.nextLine(); // Consumir a nova linha
 
+        // Busca o pedido pelo ID
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido == null) {
             System.out.println("Pedido não encontrado!");
             return;
         }
 
-        System.out.println("Digite o ID do produto:");
-        int idProduto = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
-
-        ItemPedido item = pedido.getItens().stream()
-                .filter(i -> i.getProduto().getIndentificador() == idProduto)
-                .findFirst()
-                .orElse(null);
-
-        if (item == null) {
-            System.out.println("Item não encontrado no pedido!");
-            return;
+        // Lista os itens do pedido
+        System.out.println("Itens do Pedido #" + pedido.getId() + ":");
+        for (ItemPedido item : pedido.getItens()) {
+            System.out.println("Produto: " + item.getProduto().getNome() + " | Quantidade: " + item.getQuantidade());
         }
 
-        pedidoService.removerItem(pedido, item);
-        System.out.println("Item removido com sucesso!");
+        System.out.println("Digite o nome do produto que deseja remover:");
+        String nomeProduto = scanner.nextLine();
+
+        // Encontra o item a ser removido
+        ItemPedido itemParaRemover = null;
+        for (ItemPedido item : pedido.getItens()) {
+            if (item.getProduto().getNome().equalsIgnoreCase(nomeProduto)) {
+                itemParaRemover = item;
+                break;
+            }
+        }
+
+        if (itemParaRemover != null) {
+            pedidoService.removerItem(pedido, itemParaRemover);
+            System.out.println("Item removido com sucesso!");
+        } else {
+            System.out.println("Produto não encontrado no pedido!");
+        }
     }
 
     // Método para aguardar pagamento
@@ -114,13 +126,12 @@ public class PedidoMenu {
         scanner.nextLine(); // Consumir a nova linha
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
-        if (pedido == null) {
+        if (pedido != null) {
+            pedidoService.aguardarPagamento(pedido);
+            System.out.println("Aguardando pagamento do pedido!");
+        } else {
             System.out.println("Pedido não encontrado!");
-            return;
         }
-
-        pedidoService.aguardarPagamento(pedido);
-        System.out.println("Status do pedido alterado para 'Aguardando Pagamento'.");
     }
 
     // Método para pagar pedido
@@ -130,13 +141,12 @@ public class PedidoMenu {
         scanner.nextLine(); // Consumir a nova linha
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
-        if (pedido == null) {
+        if (pedido != null) {
+            pedidoService.pagarPedido(pedido);
+            System.out.println("Pedido pago com sucesso!");
+        } else {
             System.out.println("Pedido não encontrado!");
-            return;
         }
-
-        pedidoService.pagarPedido(pedido);
-        System.out.println("Pedido pago com sucesso!");
     }
 
     // Método para finalizar pedido
@@ -146,21 +156,19 @@ public class PedidoMenu {
         scanner.nextLine(); // Consumir a nova linha
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
-        if (pedido == null) {
+        if (pedido != null) {
+            pedidoService.finalizarPedido(pedido);
+            System.out.println("Pedido finalizado com sucesso!");
+        } else {
             System.out.println("Pedido não encontrado!");
-            return;
         }
-
-        pedidoService.finalizarPedido(pedido);
-        System.out.println("Pedido finalizado com sucesso!");
     }
 
-    // Método para listar pedidos
+    // Método para listar todos os pedidos
     public void listarPedidos() {
-        System.out.println("Lista de Pedidos:");
-        pedidoService.listarPedidos().forEach(pedido ->
-                System.out.println("ID: " + pedido.getId() + " | Cliente: " + pedido.getCliente().getNome() + " | Status: " + pedido.getStatus())
-        );
+        for (Pedido pedido : pedidoService.listarPedidos()) {
+            System.out.println(pedido);
+        }
     }
 
     // Método para ver status do pedido
@@ -170,11 +178,10 @@ public class PedidoMenu {
         scanner.nextLine(); // Consumir a nova linha
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
-        if (pedido == null) {
+        if (pedido != null) {
+            System.out.println("Status do pedido: " + pedido.getStatus());
+        } else {
             System.out.println("Pedido não encontrado!");
-            return;
         }
-
-        System.out.println("Status do pedido: " + pedido.getStatus());
     }
 }

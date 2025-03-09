@@ -2,15 +2,15 @@ package model;
 
 public class Produto {
     private String nome;
-    private int indentificador;
+    private int id; // Renomeado para id
     private String categoria;
     private double valorVenda;
     private double valorProduto;
     private double valorDesconto;
 
-    public Produto(String nome, int indentificador, String categoria, double valorVenda, double valorProduto, double valorDesconto) {
+    public Produto(String nome, int id, String categoria, double valorVenda, double valorProduto, double valorDesconto) {
         this.nome = nome;
-        this.indentificador = indentificador;
+        this.id = id; // Renomeado para id
         this.categoria = categoria;
         this.valorVenda = valorVenda;
         this.valorProduto = valorProduto;
@@ -25,12 +25,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public int getIndentificador() {
-        return indentificador;
+    public int getId() { // Renomeado para getId
+        return id;
     }
 
-    public void setIndentificador(int indentificador) {
-        this.indentificador = indentificador;
+    public void setId(int id) { // Renomeado para setId
+        this.id = id;
     }
 
     public String getCategoria() {
@@ -69,7 +69,7 @@ public class Produto {
     public String toString() {
         return "Produto{" +
                 "nome='" + nome + '\'' +
-                ", indentificador=" + indentificador +
+                ", id=" + id + // Renomeado para id
                 ", categoria='" + categoria + '\'' +
                 ", valorVenda=" + valorVenda +
                 ", valorProduto=" + valorProduto +

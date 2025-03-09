@@ -1,5 +1,7 @@
 package main;
 
+import main.ClienteMenu;
+import main.ProdutoMenu;
 import service.ClienteService;
 import service.PedidoService;
 import service.ProdutoService;
@@ -11,7 +13,6 @@ public class MenuService {
     private ProdutoMenu produtoMenu;
     private PedidoMenu pedidoMenu;
 
-    // Construtor
     public MenuService(ClienteService clienteService, ProdutoService produtoService, PedidoService pedidoService) {
         this.scanner = new Scanner(System.in);
         this.clienteMenu = new ClienteMenu(scanner, clienteService);
@@ -19,17 +20,16 @@ public class MenuService {
         this.pedidoMenu = new PedidoMenu(scanner, pedidoService, clienteService, produtoService);
     }
 
-    // Executar o menu
     public void executar() {
         while (true) {
             System.out.println("\n--- Menu ---");
             System.out.println("1. Cadastrar Cliente");
             System.out.println("2. Listar Clientes");
-            System.out.println("3. Buscar Cliente por ID");
-            System.out.println("4. Cadastrar Produto");
-            System.out.println("5. Listar Produtos");
-            System.out.println("6. Criar Pedido");
-            System.out.println("7. Adicionar Item ao Pedido");
+            System.out.println("3. Cadastrar Produto");
+            System.out.println("4. Listar Produtos");
+            System.out.println("5. Criar Pedido");
+            System.out.println("6. Adicionar Item ao Pedido");
+            System.out.println("7. Remover Item do Pedido"); // Nova opção
             System.out.println("8. Aguardar Pagamento");
             System.out.println("9. Pagar Pedido");
             System.out.println("10. Finalizar Pedido");
@@ -48,19 +48,19 @@ public class MenuService {
                     clienteMenu.listarClientes();
                     break;
                 case 3:
-                    clienteMenu.buscarClientePorId();
-                    break;
-                case 4:
                     produtoMenu.cadastrarProduto();
                     break;
-                case 5:
+                case 4:
                     produtoMenu.listarProdutos();
                     break;
-                case 6:
+                case 5:
                     pedidoMenu.criarPedido();
                     break;
-                case 7:
+                case 6:
                     pedidoMenu.adicionarItemAoPedido();
+                    break;
+                case 7:
+                    pedidoMenu.removerItemDoPedido(); // Nova opção
                     break;
                 case 8:
                     pedidoMenu.aguardarPagamento();

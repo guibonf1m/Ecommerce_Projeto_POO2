@@ -41,8 +41,6 @@ public class ItemPedido {
         return quantidade * valorVenda;
     }
 
-
-
     @Override
     public String toString() {
         return "ItemPedido{" +

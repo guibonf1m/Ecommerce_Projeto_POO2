@@ -34,7 +34,7 @@ public class ProdutoService {
     }
 
     // Buscar produto por identificador
-    public Produto buscarProdutoPorIdentificador(int identificador){
-        return repository.buscarPorIdentificador(identificador);
+    public Produto buscarProdutoPorId(int id) {
+        return repository.buscarPorId(id);
     }
 }
