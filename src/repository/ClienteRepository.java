@@ -24,6 +24,6 @@ public class ClienteRepository {
                 return cliente;
             }
         }
-        return null; // Retorna null se o cliente não for encontrado
+        return null;
     }
 }

@@ -25,11 +25,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public int getId() { // Renomeado para getId
+    public int getId() {
         return id;
     }
 
-    public void setId(int id) { // Renomeado para setId
+    public void setId(int id) {
         this.id = id;
     }
 

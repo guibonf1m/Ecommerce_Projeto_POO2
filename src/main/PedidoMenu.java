@@ -26,7 +26,7 @@ public class PedidoMenu {
     public void criarPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         System.out.println("Digite o ID do cliente:");
         String idCliente = scanner.nextLine();
@@ -47,7 +47,7 @@ public class PedidoMenu {
     public void adicionarItemAoPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         // Busca o pedido pelo ID
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
@@ -57,8 +57,8 @@ public class PedidoMenu {
         }
 
         System.out.println("Digite o ID do produto:");
-        int idProduto = scanner.nextInt(); // Lê o ID do produto como int
-        scanner.nextLine(); // Consumir a nova linha
+        int idProduto = scanner.nextInt();
+        scanner.nextLine();
 
         // Busca o produto pelo ID
         Produto produto = produtoService.buscarProdutoPorId(idProduto);
@@ -69,11 +69,11 @@ public class PedidoMenu {
 
         System.out.println("Digite a quantidade:");
         int quantidade = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         System.out.println("Digite o preço:");
         double preco = scanner.nextDouble();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         // Adiciona o item ao pedido
         pedidoService.adicionarItem(pedido, produto, quantidade, preco);
@@ -84,7 +84,7 @@ public class PedidoMenu {
     public void removerItemDoPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         // Busca o pedido pelo ID
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
@@ -123,7 +123,7 @@ public class PedidoMenu {
     public void aguardarPagamento() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido != null) {
@@ -138,7 +138,7 @@ public class PedidoMenu {
     public void pagarPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido != null) {
@@ -153,7 +153,7 @@ public class PedidoMenu {
     public void finalizarPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido != null) {
@@ -175,7 +175,7 @@ public class PedidoMenu {
     public void verStatusPedido() {
         System.out.println("Digite o ID do pedido:");
         int idPedido = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         Pedido pedido = pedidoService.buscarPedidoPorId(idPedido);
         if (pedido != null) {

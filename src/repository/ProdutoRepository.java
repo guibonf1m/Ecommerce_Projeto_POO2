@@ -20,10 +20,10 @@ public class ProdutoRepository {
     // Buscar produto por ID
     public Produto buscarPorId(int id) {
         for (Produto produto : produtos) {
-            if (produto.getId() == id) { // Usa == para comparar int
+            if (produto.getId() == id) {
                 return produto;
             }
         }
-        return null; // Retorna null se o produto não for encontrado
+        return null;
     }
 }

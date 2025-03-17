@@ -8,7 +8,6 @@ public class ClienteMenu {
     private Scanner scanner;
     private ClienteService clienteService;
 
-    // Construtor
     public ClienteMenu(Scanner scanner, ClienteService clienteService) {
         this.scanner = scanner;
         this.clienteService = clienteService;

@@ -1,7 +1,5 @@
 package main;
 
-import main.ClienteMenu;
-import main.ProdutoMenu;
 import service.ClienteService;
 import service.PedidoService;
 import service.ProdutoService;
@@ -38,7 +36,7 @@ public class MenuService {
             System.out.println("13. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Consumir a nova linha
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -60,7 +58,7 @@ public class MenuService {
                     pedidoMenu.adicionarItemAoPedido();
                     break;
                 case 7:
-                    pedidoMenu.removerItemDoPedido(); // Nova opção
+                    pedidoMenu.removerItemDoPedido();
                     break;
                 case 8:
                     pedidoMenu.aguardarPagamento();

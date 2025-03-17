@@ -20,7 +20,7 @@ public class ProdutoMenu {
         String nome = scanner.nextLine();
         System.out.print("Identificador do produto: ");
         int identificador = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
         System.out.print("Categoria do produto: ");
         String categoria = scanner.nextLine();
         System.out.print("Valor de venda: ");
@@ -29,7 +29,7 @@ public class ProdutoMenu {
         double valorProduto = scanner.nextDouble();
         System.out.print("Valor do desconto: ");
         double valorDesconto = scanner.nextDouble();
-        scanner.nextLine(); // Consumir a nova linha
+        scanner.nextLine();
 
         Produto produto = new Produto(nome, identificador, categoria, valorVenda, valorProduto, valorDesconto);
         try {

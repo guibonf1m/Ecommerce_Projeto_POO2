@@ -8,7 +8,7 @@ public class NotificacaoService {
 
     // Notificar o cliente por e-mail e WhatsApp
     public void notificarCliente(Cliente cliente, String mensagem) {
-        notificacaoEmail.notificar(cliente, mensagem); // Notificação por e-mail
-        notificacaoWhats.notificar(cliente, mensagem); // Notificação por WhatsApp
+        notificacaoEmail.notificar(cliente, mensagem);
+        notificacaoWhats.notificar(cliente, mensagem);
     }
 }
